@@ -1,0 +1,4 @@
+1) para calcular a funcao utilidade , devemos fazer o seguinte (tal como a professora disse):
+otherwise, take all possible straight segments on the grid (defined as a set of four slots in a line:
+horizontal, vertical, or diagonal), evaluate each of them according to the rules below and return
+the sum of the values over all segments.
