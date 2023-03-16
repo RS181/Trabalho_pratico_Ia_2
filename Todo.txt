@@ -1,9 +1,7 @@
-1)criar metodo auxiliar que verifica se a diagonal 
-tem algum vencedor 
 
-2) criar um metodo que gere todos os possiveis descdentes 
-de um jogador , ou seja , se for o X a jogar , devemos por 
-o X em todas as posicoes possiveis 
+1)implementar os movimentos possíveis do jogo,dada a peca: dado um tabuleiro 
+como entrada, produzir seus sucessores (com a peça trocada)
+
 
 3)Impelementar funcao que calcule o utilidade (segundo definicao dada em t2.pdf)
   

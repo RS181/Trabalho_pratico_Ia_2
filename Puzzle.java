@@ -75,9 +75,11 @@ class Puzzle {
     }
 
     //!Indica a coluna em que queromos jogar uma peca
+    //TODO a Bola representa o bot
     void Choose_col(int col){
         //?Posicao invalida
         if ( col >= 7 || col < 0){
+            System.out.println("coluna =" + col);
             System.out.println("Coluna invalida");
             return;
         }
@@ -146,7 +148,7 @@ class Puzzle {
         return (s.contains("XXXX") || s.contains("OOOO"));
     }
     //? Indica se alguma coluna contem a substring com 4 X's ou 4 O's
-    boolean Row_complete(String s){
+    boolean col_complete(String s){
         return (s.contains("XXXX") || s.contains("OOOO"));
     }
 
@@ -183,12 +185,17 @@ class Puzzle {
             for (int i = 0 ; i < state.length ; i++){
                 aux += state[i][j];
             }
-            if (Row_complete(aux) == true){
+            if (col_complete(aux) == true){
                 System.out.println("Coluna " + j + " tem um vencedor");
                 return true;
             }
         }
-        //todo FALTA VERIFICAR AS DIAGONAIS PARA VITORIAS
+        //? Verifica se o estado do jogo atual tem algum vencedor(diagonal)
+        Diagonais d = new Diagonais(this);
+        if (d.check_final() == true){
+            System.out.println("Temos vencedor nas diagonais");
+            return true;
+        }
         return false;
     }
     @Override
@@ -197,7 +204,7 @@ class Puzzle {
         for (int i = 0; i < state.length; i++) {
             ans += String.valueOf(state[i]) + "\n";
         }
-        ans += "1234567\n";
+        ans += "0123456\n";
         return ans;
     }
 
