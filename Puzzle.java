@@ -398,6 +398,10 @@ class Puzzle {
         cur_utility = Utility_aux(aux);
         u += cur_utility;
         System.out.println("DS6 = " + aux + " | tem utilidade = " + cur_utility );
+
+
+        Utility = u;
+        System.out.println(Utility);
     }
 
 
