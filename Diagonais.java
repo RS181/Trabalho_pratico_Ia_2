@@ -136,6 +136,31 @@ class Diagonais {
             pos++;
         }
     }
+    int Utility_aux_d(String s){
+        int nr_X =0;
+        int nr_O =0;
+
+        for (int i = 0 ; i < s.length();i++){
+            if(s.charAt(i) == 'X')
+                nr_X++;
+            else if (s.charAt(i) == 'O')
+                nr_O++;
+        }
+
+        
+        if (nr_O == 3 && nr_X == 0) return -50;
+        else if (nr_O == 2 && nr_X == 0) return -10;
+        else if (nr_O == 1 && nr_X == 0) return -1;
+        else if (nr_X == 3 && nr_O == 0) return 50;
+        else if (nr_X == 2 && nr_O == 0) return 10;
+        else if (nr_X == 1 && nr_O == 0) return 1;
+
+ 
+        return 0;
+    }
+
+
+
 
     //verifica se alguma das diagonais contem "XXXX" ou "OOOO"
     boolean check_final(){
@@ -151,13 +176,7 @@ class Diagonais {
         String.valueOf(DP4).contains("XXXX") || String.valueOf(DP4).contains("OOOO") ||
         String.valueOf(DP5).contains("XXXX") || String.valueOf(DP5).contains("OOOO") ||
         String.valueOf(DP6).contains("XXXX") || String.valueOf(DP6).contains("OOOO") ;
-
-
-
-
     }
-
-
 
     @Override
     public String toString() {

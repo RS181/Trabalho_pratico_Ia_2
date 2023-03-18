@@ -54,8 +54,8 @@ public class Main{
         p.upload_board(aux);
         // System.out.println(p);
         // System.out.println(Arrays.toString(p.valid));
-        Play_with_2_players(p);        
-        
+        // Play_with_2_players(p);        
+        p.Calculate_Utility();
        
 
         
