@@ -1,8 +1,6 @@
-1)implementar os movimentos possíveis do jogo com uma certa peca: dado um tabuleiro 
-como entrada, produzir todos seus sucessores (com a peça trocada), ver figura do livro
 
 
-2)testar funcao que calcule o utilidade (segundo definicao dada em t2.pdf)
+1)testar funcao que calcule o utilidade !!! (segundo definicao dada em t2.pdf)
 
 3)Comecar a verificar como implementar Min-Max e alpha beta
 

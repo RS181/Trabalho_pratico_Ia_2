@@ -1,64 +1,90 @@
-Linha 0 = -------
-substring da linha  0 e colunas [0,3] : ---- | tem utilidade = 0
-substring da linha  0 e colunas [1,4] : ---- | tem utilidade = 0
-substring da linha  0 e colunas [2,5] : ---- | tem utilidade = 0
-substring da linha  0 e colunas [3,6] : ---- | tem utilidade = 0
-Linha 1 = -------
-substring da linha  1 e colunas [0,3] : ---- | tem utilidade = 0
-substring da linha  1 e colunas [1,4] : ---- | tem utilidade = 0
-substring da linha  1 e colunas [2,5] : ---- | tem utilidade = 0
-substring da linha  1 e colunas [3,6] : ---- | tem utilidade = 0
-Linha 2 = -------
-substring da linha  2 e colunas [0,3] : ---- | tem utilidade = 0
-substring da linha  2 e colunas [1,4] : ---- | tem utilidade = 0
-substring da linha  2 e colunas [2,5] : ---- | tem utilidade = 0
-substring da linha  2 e colunas [3,6] : ---- | tem utilidade = 0
-Linha 3 = -------
-substring da linha  3 e colunas [0,3] : ---- | tem utilidade = 0
-substring da linha  3 e colunas [1,4] : ---- | tem utilidade = 0
-substring da linha  3 e colunas [2,5] : ---- | tem utilidade = 0
-substring da linha  3 e colunas [3,6] : ---- | tem utilidade = 0
-Linha 4 = X--O-XO
-substring da linha  4 e colunas [0,3] : X--O | tem utilidade = 0
-substring da linha  4 e colunas [1,4] : --O- | tem utilidade = -1
-substring da linha  4 e colunas [2,5] : -O-X | tem utilidade = 0
-substring da linha  4 e colunas [3,6] : O-XO | tem utilidade = 0
-Linha 5 = X-OXOXO
-substring da linha  5 e colunas [0,3] : X-OX | tem utilidade = 0
-substring da linha  5 e colunas [1,4] : -OXO | tem utilidade = 0
-substring da linha  5 e colunas [2,5] : OXOX | tem utilidade = 0
-substring da linha  5 e colunas [3,6] : XOXO | tem utilidade = 0
 
-Coluna 0 = ----XX
-substring da coluna 0 e linhas [0,3] :  ---- | tem utilidade = 0
-substring da coluna 0 e linhas [1,4] :  ---X | tem utilidade = 1
-substring da coluna 0 e linhas [2,5] :  --XX | tem utilidade = 10
-Coluna 1 = ------
-substring da coluna 1 e linhas [0,3] :  ---- | tem utilidade = 0
-substring da coluna 1 e linhas [1,4] :  ---- | tem utilidade = 0
-substring da coluna 1 e linhas [2,5] :  ---- | tem utilidade = 0
-Coluna 2 = -----O
-substring da coluna 2 e linhas [0,3] :  ---- | tem utilidade = 0
-substring da coluna 2 e linhas [1,4] :  ---- | tem utilidade = 0
-substring da coluna 2 e linhas [2,5] :  ---O | tem utilidade = -1
-Coluna 3 = ----OX
-substring da coluna 3 e linhas [0,3] :  ---- | tem utilidade = 0
-substring da coluna 3 e linhas [1,4] :  ---O | tem utilidade = -1
-substring da coluna 3 e linhas [2,5] :  --OX | tem utilidade = 0
-Coluna 4 = -----O
-substring da coluna 4 e linhas [0,3] :  ---- | tem utilidade = 0
-substring da coluna 4 e linhas [1,4] :  ---- | tem utilidade = 0
-substring da coluna 4 e linhas [2,5] :  ---O | tem utilidade = -1
-Coluna 5 = ----XX
-substring da coluna 5 e linhas [0,3] :  ---- | tem utilidade = 0
-substring da coluna 5 e linhas [1,4] :  ---X | tem utilidade = 1
-substring da coluna 5 e linhas [2,5] :  --XX | tem utilidade = 10
-Coluna 6 = ----OO
-substring da coluna 6 e linhas [0,3] :  ---- | tem utilidade = 0
-substring da coluna 6 e linhas [1,4] :  ---O | tem utilidade = -1
-substring da coluna 6 e linhas [2,5] :  --OO | tem utilidade = -10
 
-DP1 =---X | tem utilidade = 1
-DP2 =---OO
-substring de DP2 de [0,3] : ---O | tem utilidade = -1
-substring de DP2 de [1,4] : --OO | tem utilidade = -10
+
+
+
+
+
+->[-------
+-------
+-------
+X------
+X--O-XO
+X-OXOXO
+0123456
+
+ Tem utilidade = 42
+, -------
+-------
+-------
+-------
+X--O-XO
+XXOXOXO
+0123456
+
+ Tem utilidade = -8
+, -------
+-------
+-------
+-------
+X-XO-XO
+X-OXOXO
+0123456
+
+ Tem utilidade = 4
+, -------
+-------
+-------
+---X---
+X--O-XO
+X-OXOXO
+0123456
+
+ Tem utilidade = 10
+, -------
+-------
+-------
+-------
+X--OXXO
+X-OXOXO
+0123456
+
+ Tem utilidade = 12
+, -------
+-------
+-------
+-----X-
+X--O-XO
+X-OXOXO
+0123456
+
+ Tem utilidade = 53
+, -------
+-------
+-------
+------X
+X--O-XO
+X-OXOXO
+0123456
+
+ Tem utilidade = 4
+]
+
+
+
+
+
+
+
+
+-------
+-------
+-------
+-----X-
+X--O-XO
+X-OXOXO
+0123456
+
+ Tem utilidade = 53
+
+[3, 5, 4, 3, 4, 2, 3]

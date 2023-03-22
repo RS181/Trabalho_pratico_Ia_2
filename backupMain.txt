@@ -1,4 +1,4 @@
-
+// 21/03/2023 21:14
 import java.util.*;
 
 public class Main{
@@ -47,17 +47,14 @@ public class Main{
     public static ArrayList<Node> Sucessores(Node n){
         ArrayList<Node> suc = new ArrayList<>();
         Puzzle aux = n.current;
-        //? So gera sucessores se o no atual nao for
-        if (!(n.current.Is_Terminal())){
-            for (int i = 0 ; i < 7 ;i++){
-                //Se a coluna atual for valida para jogar criamos sucesores 
-                if (aux.valid[i] != -1){
-                    //faz o movimento sem alterar o puzzle original
-                    Puzzle temp = aux.Result(aux,i);
+        for (int i = 0 ; i < 7 ;i++){
+            //Se a coluna atual for valida para jogar criamos sucesores 
+            if (aux.valid[i] != -1){
+                //faz o movimento sem alterar o puzzle original
+                Puzzle temp = aux.Result(aux,i);
 
-                    //criamos um novo no 
-                    suc.add(new Node(temp));
-                }
+                //criamos um novo no 
+                suc.add(new Node(temp));
             }
         }
         return suc;
@@ -67,12 +64,13 @@ public class Main{
     //!Todo Acabar metodo do minimax e testar-lo
     //!todo falta fazer a parte de retornar o melhor no
     public static Node MiniMax(Node Initial,int MaxDepth){
-        Node best = max_value(Initial,MaxDepth);
+        Set<String> visited = new HashSet<>();
+        Node best = max_value(Initial,MaxDepth,visited);
         return best;
     }
     //*Estamos no turno Max(computador a jogar) e queremos o maximo do turno Min
 
-    public static Node max_value(Node cur,int MaxDepth){
+    public static Node max_value(Node cur,int MaxDepth, Set<String> visited){
         if (cur.current.Is_Terminal() || MaxDepth == 0 || cur.current.Full() ){
             cur.Utility = cur.current.Calculate_Utility();
             return cur;
@@ -80,7 +78,9 @@ public class Main{
         //!No que contem a maior utilidade (proximo movimento do Computador)
         Node best = null;
 
+
         int v = Integer.MIN_VALUE;
+
             //Sucessores do no atual
             ArrayList<Node> Sucessors = Sucessores(cur);
 
@@ -88,9 +88,8 @@ public class Main{
             for (int i = 0 ; i < Sucessors.size(); i++){
                 Puzzle next =Sucessors.get(i).current;
                 Node filho = new Node(next);
-                int minValue = min_value(filho, MaxDepth-1);
-                //! se o valor atual for maior limite inferior(Integer.MIN_VALUE)
-                //!
+                visited.add(filho.current.toString());
+                int minValue = min_value(filho, MaxDepth-1,visited);
                 if (minValue > v){
                     v = minValue;
                     best = filho;
@@ -100,7 +99,8 @@ public class Main{
     }
 
     //*Estamos no turno Min e queremos o minimo do turno Max
-    public static int min_value(Node cur,int MaxDepth){
+
+    public static int min_value(Node cur,int MaxDepth,Set<String> visited){
         //?Verifica se  (o no atual e um no terminal ou a profundidade maxima foi atingida ou temos o tabuleiro cheio
          
         if (cur.current.Is_Terminal() || MaxDepth == 0 || cur.current.Full() ){
@@ -118,8 +118,9 @@ public class Main{
         for (int i = 0 ; i < Sucessors.size();i++){
             Puzzle next =Sucessors.get(i).current;
             Node filho = new Node(next);
+            visited.add(filho.current.toString());
             //?queremos o minimo dos successores
-            v = Math.min(v,max_value(filho, MaxDepth-1).current.Calculate_Utility());
+            v = Math.min(v,max_value(filho, MaxDepth-1,visited).current.Calculate_Utility());
         }
         return v;
     }
@@ -169,7 +170,8 @@ public class Main{
         // System.out.println(p);
         // System.out.println(Arrays.toString(p.valid));
         // Play_with_2_players(p);        
-        System.out.println("Indique a dificuldade (< 8 senao demora muito)");
+        Node n = new Node(p);
+        System.out.println("Indique a dificuldade (< 9 senao demora muito)");
         int dificuldade = stdin.nextInt();
 
         Play_with_Computer(p,dificuldade);        

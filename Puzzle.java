@@ -33,7 +33,7 @@ class Puzzle {
         int nr_x = 0;
         int nr_o = 0;
         // ?joga aquele que tiver menos pecas no tabuleiro (ou no caso de empate joga o
-        // X)
+        // O)
         for (int i = 0; i < state.length; i++) {
             for (int j = 0; j < state[0].length; j++) {
                 if (state[i][j] == 'X')
@@ -50,7 +50,7 @@ class Puzzle {
             turn = "X's turn";
         // *proximo jogador e X
         else if (nr_x == nr_o)
-            turn = "X's turn";
+            turn = "O's turn";
     }
 
     // !Indica e atualiza numero de movimentos legais
@@ -74,7 +74,7 @@ class Puzzle {
     }
 
     //!Indica a coluna em que queromos jogar uma peca
-    //TODO X representa o bot
+    //TODO O representa o bot
     void Choose_col(int col){
         //?Posicao invalida
         if ( col >= 7 || col < 0){
@@ -166,7 +166,7 @@ class Puzzle {
     boolean Is_Terminal(){ 
         //nao tem mais espaco para fazer jogadas
         if (Full()){
-            System.out.println("Tabuleiro cheio");
+            // System.out.println("Tabuleiro cheio");
             return true;
         }
         //?Verifica se algum dos jogadores ganhou (Horizontal)
@@ -174,7 +174,7 @@ class Puzzle {
         for (int i = 0 ; i < state.length ;i++){
             String aux = String.valueOf(state[i]);
             if (Line_complete(aux) == true){
-                System.out.println("linha " + i + " tem um vencedor");
+                // System.out.println("linha " + i + " tem um vencedor");
                 return true;
             }
         }
@@ -185,20 +185,21 @@ class Puzzle {
                 aux += state[i][j];
             }
             if (col_complete(aux) == true){
-                System.out.println("Coluna " + j + " tem um vencedor");
+                // System.out.println("Coluna " + j + " tem um vencedor");
                 return true;
             }
         }
         //? Verifica se o estado do jogo atual tem algum vencedor(diagonal)
         Diagonais d = new Diagonais(this);
         if (d.check_final() == true){
-            System.out.println("Temos vencedor nas diagonais");
+            // System.out.println("Temos vencedor nas diagonais");
             return true;
         }
         return false;
     }
 
     //!calcula o valor da funcao utilidade de uma string de tamnaho 4 que representa um segmento de  linha/coluna/diagonal
+    
     int Utility_aux(String s){
         int nr_X =0;
         int nr_O =0;
@@ -217,7 +218,9 @@ class Puzzle {
         else if (nr_X == 3 && nr_O == 0) return 50;
         else if (nr_X == 2 && nr_O == 0) return 10;
         else if (nr_X == 1 && nr_O == 0) return 1;
-
+        //todo testar estas condicoes
+        else if (nr_O == 4) return -512;
+        else if (nr_X == 4) return 512;
  
         return 0;
     }
@@ -233,7 +236,7 @@ class Puzzle {
     //!funcao que calcula a utilidade de um dado puzzle, e atualiza o valor da mesma
     //TODO testar a funcao utilidade (fazer varios testes)
 
-    void Calculate_Utility(){
+    int Calculate_Utility(){
         //variavel que guarda o valor da funcao utilidade
         int u = 0;
         //? calculo da linhas
@@ -241,7 +244,7 @@ class Puzzle {
             //? Transformamos s numa string
             StringBuilder s = new StringBuilder();
             s.append(state[i]);
-            System.out.println("Linha " + i + " = " + s);
+            // System.out.println("Linha " + i + " = " + s);
             for (int j = 0 ; j < state[0].length;j++){
                 if ( j == 4)
                     break;
@@ -250,21 +253,21 @@ class Puzzle {
 
                 int cur_utility = Utility_aux(aux);
                 u += cur_utility;
-                System.out.println("substring da linha  "+ i +" e colunas [" + j + "," + (j+3)  + "]" + " : " +aux + " | tem utilidade = "+ cur_utility);
+                // System.out.println("substring da linha  "+ i +" e colunas [" + j + "," + (j+3)  + "]" + " : " +aux + " | tem utilidade = "+ cur_utility);
             }
         }
-        System.out.println( );
+        // System.out.println( );
         //? calculo das colunas
         for (int j = 0; j < state[0].length;j++ ){
             String s = get_coluna(j);
-            System.out.println("Coluna " + j + " = " + s);
+            // System.out.println("Coluna " + j + " = " + s);
             for (int i = 0 ; i < state.length ;i++){
                 if (i == 3)
                     break;
                 String aux = " " + state[i][j] + state[i+1][j] + state[i+2][j] + state[i+3][j]; 
                 int cur_utility = Utility_aux(aux);
                 u += cur_utility;
-                System.out.println("substring da coluna "+ j +" e linhas [" + i + "," + (i+3)  + "]" + " : " +aux + " | tem utilidade = "+ cur_utility);
+                // System.out.println("substring da coluna "+ j +" e linhas [" + i + "," + (i+3)  + "]" + " : " +aux + " | tem utilidade = "+ cur_utility);
             }
         }
 
@@ -274,12 +277,12 @@ class Puzzle {
         String aux = ""+ d.DP1[0] + d.DP1[1] +d.DP1[2] +d.DP1[3];
         int cur_utility = Utility_aux(aux);
         u += cur_utility;
-        System.out.println("DP1 = " + aux + " | tem utilidade = " + cur_utility);
+        // System.out.println("DP1 = " + aux + " | tem utilidade = " + cur_utility);
 
         //DP2
         StringBuilder s = new StringBuilder();
         s.append(d.DP2); 
-        System.out.println("DP2 = " + s);
+        // System.out.println("DP2 = " + s);
         for (int i = 0 ; i < d.DP2.length ;i++){
             if (i == 2)
                 break;
@@ -287,122 +290,128 @@ class Puzzle {
             cur_utility = Utility_aux(aux);
             u += cur_utility;
 
-            System.out.println("substring de DP2 de [" + i + "," + (i+3)  + "]" + " : " +aux + " | tem utilidade = "+ cur_utility);
+            // System.out.println("substring de DP2 de [" + i + "," + (i+3)  + "]" + " : " +aux + " | tem utilidade = "+ cur_utility);
         }
         //DP3
         s = new StringBuilder();
         s.append(d.DP3);
-        System.out.println("DP3 = " + s);
+        // System.out.println("DP3 = " + s);
         for (int i = 0 ; i < d.DP3.length ;i++){
             if (i == 3)
                 break;
             aux = "" + d.DP3[i] + d.DP3[i+1] + d.DP3[i+2] + d.DP3[i+3]; 
             cur_utility = Utility_aux(aux);
             u += cur_utility;
-            System.out.println("substring de DP3 de [" + i + "," + (i+3)  + "]" + " : " +aux + " | tem utilidade = "+ cur_utility);
+            // System.out.println("substring de DP3 de [" + i + "," + (i+3)  + "]" + " : " +aux + " | tem utilidade = "+ cur_utility);
         }
 
         //DP4
         s = new StringBuilder();
         s.append(d.DP4);
-        System.out.println("DP4 = " + s);
+        // System.out.println("DP4 = " + s);
         for (int i = 0 ; i < d.DP4.length;i++){
             if (i == 3)
                 break;
             aux = "" + d.DP4[i] + d.DP4[i+1] +d.DP4[i+2] +d.DP4[i+3];
             cur_utility = Utility_aux(aux);
             u += cur_utility;
-            System.out.println("substring de DP4 de [" + i + "," + (i+3)  + "]" + " : " +aux + " | tem utilidade = "+ cur_utility);
+            // System.out.println("substring de DP4 de [" + i + "," + (i+3)  + "]" + " : " +aux + " | tem utilidade = "+ cur_utility);
         }
 
         //DP5 
         s = new StringBuilder();
         s.append(d.DP5);
-        System.out.println("DP5 = " + s);
+        // System.out.println("DP5 = " + s);
         for (int i = 0 ; i < d.DP5.length ;i++){
             if (i==2)
                 break;
             aux = "" + d.DP5[i] + d.DP5[i+1] + d.DP5[i+2]+ d.DP5[i+3];
             cur_utility = Utility_aux(aux);
             u += cur_utility;
-            System.out.println("substring de DP5 de [" + i + "," + (i+3)  + "]" + " : " +aux + " | tem utilidade = "+ cur_utility);
+            // System.out.println("substring de DP5 de [" + i + "," + (i+3)  + "]" + " : " +aux + " | tem utilidade = "+ cur_utility);
         }
         
         //DP6
         aux = "" + d.DP6[0] + d.DP6[1] +d.DP6[2] +d.DP6[3] ;
         cur_utility = Utility_aux(aux);
-        System.out.println("DP6 = " + aux + " | tem utilidade = " +cur_utility );
+        // System.out.println("DP6 = " + aux + " | tem utilidade = " +cur_utility );
         u += cur_utility;
         
         //DS1
         aux = "" + d.DS1[0] +d.DS1[1] +d.DS1[2] +d.DS1[3];
         cur_utility = Utility_aux(aux);
-        System.out.println("DS1 = " + aux + " | tem utilidade = " + cur_utility);
+        // System.out.println("DS1 = " + aux + " | tem utilidade = " + cur_utility);
         u += cur_utility;
 
         //DS2 
         s = new StringBuilder();
         s.append(d.DS2);
-        System.out.println("DS2 = " + s);
+        // System.out.println("DS2 = " + s);
         for (int i = 0; i < d.DS2.length ;i++){
             if (i == 2)
                 break;
             aux = "" + d.DS2[i] + d.DS2[i+1] +d.DS2[i+2] +d.DS2[i+3];
             cur_utility = Utility_aux(aux);
             u += cur_utility;
-            System.out.println("substring de DS2 de [" + i + "," + (i+3)  + "]" + " : " +aux + " | tem utilidade = "+ cur_utility);
+            // System.out.println("substring de DS2 de [" + i + "," + (i+3)  + "]" + " : " +aux + " | tem utilidade = "+ cur_utility);
 
         }
 
         //DS3 
         s = new StringBuilder();
         s.append(d.DS3);
-        System.out.println("DS3 = " + s);
+        // System.out.println("DS3 = " + s);
         for (int i = 0 ; i < d.DS3.length ;i++){
             if ( i== 3)
                 break;
             aux = "" + d.DS3[i] + d.DS3[i+1] + d.DS3[i+2] + d.DS3[i+3];
             cur_utility = Utility_aux(aux);
             u += cur_utility;
-            System.out.println("substring de DS3 de [" + i + "," + (i+3)  + "]" + " : " +aux + " | tem utilidade = "+ cur_utility);
+            // System.out.println("substring de DS3 de [" + i + "," + (i+3)  + "]" + " : " +aux + " | tem utilidade = "+ cur_utility);
         }
 
         //DS4
         s = new StringBuilder();
         s.append(d.DS4);
-        System.out.println("DS4 = " + s);
+        // System.out.println("DS4 = " + s);
         for (int i = 0 ; i < d.DS4.length ; i++){
             if ( i == 3)
                 break;
             aux = "" + d.DS4[i] + d.DS4[i+1] + d.DS4[i+2] + d.DS4[i+3];
             cur_utility = Utility_aux(aux);
             u += cur_utility;
-            System.out.println("substring de DS4 de [" + i + "," + (i+3)  + "]" + " : " +aux + " | tem utilidade = "+ cur_utility);
+            // System.out.println("substring de DS4 de [" + i + "," + (i+3)  + "]" + " : " +aux + " | tem utilidade = "+ cur_utility);
         }
 
         //DS5
         s = new StringBuilder();
         s.append(d.DS5);
-        System.out.println("DS5 = " +s);
+        // System.out.println("DS5 = " +s);
         for (int i = 0 ; i < d.DS5.length ;i++){
             if ( i == 2)
                 break;
             aux = "" + d.DS5[i] + d.DS5[i+1] +d.DS5[i+2] +d.DS5[i+3];
             cur_utility = Utility_aux(aux);
             u += cur_utility;
-            System.out.println("substring de DS5 de [" + i + "," + (i+3)  + "]" + " : " +aux + " | tem utilidade = "+ cur_utility);
+            // System.out.println("substring de DS5 de [" + i + "," + (i+3)  + "]" + " : " +aux + " | tem utilidade = "+ cur_utility);
         }
 
         //DS6
         aux = "" + d.DS6[0] + d.DS6[1] +d.DS6[2] +d.DS6[3] ;
         cur_utility = Utility_aux(aux);
         u += cur_utility;
-        System.out.println("DS6 = " + aux + " | tem utilidade = " + cur_utility );
+        // System.out.println("DS6 = " + aux + " | tem utilidade = " + cur_utility );
 
 
         Utility = u;
-        System.out.println(Utility);
+    
+        // System.out.println("Valor de utilidade = " + Utility);
+        return u;
     }
+
+
+
+
 
 
 

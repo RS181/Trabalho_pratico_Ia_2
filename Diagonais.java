@@ -154,6 +154,10 @@ class Diagonais {
         else if (nr_X == 3 && nr_O == 0) return 50;
         else if (nr_X == 2 && nr_O == 0) return 10;
         else if (nr_X == 1 && nr_O == 0) return 1;
+        
+        //todo testar condicao abaixo !!!!!!!!!!!!!!!!!
+        else if (nr_O == 4) return -512;
+        else if (nr_X == 4) return 512;
 
  
         return 0;
