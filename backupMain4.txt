@@ -1,5 +1,5 @@
-// 23/03/2023 10:18
-//! Minimax aparente funcionar
+// 23/03/2023 17:00
+//! Minimax FUNCIONA MAS NAO TEM SUGESTAO DA PROFESSORA
 import java.util.*;
 
 public class Main{
@@ -57,18 +57,11 @@ public class Main{
             //escolhe o bot
             else{
                 Node aux = new Node(p);
-                //Sugestao da professora
-                Node aux2 = aux.Succesor_is_Final();
-                if (aux2 != null){
-                    p = aux.Succesor_is_Final().current;
-                }
-                //Sugestao da professora
-                else {
-                    Node ans = (new MiniMax(aux, Dificulty)).getBestNode();
-          
-                    p = ans.current;
-                    System.out.println("Jogada feita por computador");
-                }
+                Node ans = (new MiniMax(aux, Dificulty)).getBestNode();
+                if (ans == null)
+                    System.out.println("DEBUG");
+                p = ans.current;
+                System.out.println("Jogada feita por computador");
             }
         }
 
@@ -85,7 +78,7 @@ public class Main{
 
     public static void main(String[] args) {
         Scanner stdin = new Scanner (System.in);
-        System.out.println("Indique um tabuleiro");
+        
         //?Parte de carregar uma dada configuracao 
         String aux ="";
         for (int i = 0 ; i < 6 ;i++ )
