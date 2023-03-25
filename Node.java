@@ -3,7 +3,9 @@ class Node {
     Puzzle current;//Puzzle atual
     int Utility;
     
-
+    Node(){
+        current = new Puzzle();
+    }
     //* recebe um puzzle e um caminho 
     Node(Puzzle p){
         current = p.copy();

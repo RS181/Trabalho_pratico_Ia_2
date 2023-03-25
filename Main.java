@@ -42,7 +42,7 @@ public class Main{
 
 
     //Supondo que X sao as jogadas do computador
-    public static void Play_with_Computer(Puzzle p, int Dificulty){
+    public static void Play_with_Computer(Puzzle p, int Dificulty,String AI){
         Scanner stdin = new Scanner (System.in);
 
         //Enquanto nao e terminal e nao esta completamente cheio (quebra o ciclo se algum destes falhar)
@@ -64,8 +64,11 @@ public class Main{
                 }
                 //Sugestao da professora
                 else {
-                    Node ans = (new MiniMax(aux, Dificulty)).getBestNode();
-          
+                    Node ans;
+                    if (AI.equals("minimax"))
+                        ans = (new MiniMax(aux, Dificulty)).getBestNode();
+                    else 
+                        ans = (new AlphaBeta(aux, Dificulty)).getBestNode();
                     p = ans.current;
                     System.out.println("Jogada feita por computador");
                 }
@@ -97,7 +100,14 @@ public class Main{
         // Play_with_2_players(p);        
         System.out.println("Indique a dificuldade (< 8 senao demora muito)");
         int dificuldade = stdin.nextInt();
+        stdin.nextLine();
+        System.out.println("Indique contra qual algoritmo quer jogar\nminimax   alphabeta     montecarlo");
+        String Ai = stdin.nextLine();
+        if (Ai.equals("minimax") ||Ai.equals("alphabeta"))
+            Play_with_Computer(p,dificuldade,Ai);     
+        else if (Ai.equals("montecarlo")){
+            System.out.println("Ainda por implementar");
+        }
 
-        Play_with_Computer(p,dificuldade);        
     }
 }
