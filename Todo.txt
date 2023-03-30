@@ -1,11 +1,4 @@
-
-
-1)testar funcao que calcule o utilidade !!! (segundo definicao dada em t2.pdf)
-
-3)Comecar a verificar como implementar Min-Max e alpha beta
-
-  
-4)(Envetualmente) Fazer uma classe Node semelhante a que fizemos no puzzle anterior
-mas com algumas mofificacoes (ver livro capitulo 6 para tomar alguma inspiracao)
-
-5) Eliminar passos redundantes (estar sempre a calcular diagonais,por exemplo)
+1)Acabar MCTS
+2)testar MCTS  
+3) testar minimax
+4)testar alpha beta
