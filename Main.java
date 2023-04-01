@@ -33,7 +33,11 @@ public class Main{
         System.out.println("estado final do tabuleiro");
         System.out.println(p);
         if (p.Is_Terminal()){
-            if(p.turn.equals("O's turn"))
+            //! -----------------------------//
+            if (p.draw ==true)
+                System.out.println("Empate");
+            //! -----------------------------//
+            else if(p.turn.equals("O's turn"))
                 System.out.println("X Ganhou");
             else if (p.turn.equals("X's turn"))
                 System.out.println("O Ganhou");
@@ -78,7 +82,11 @@ public class Main{
         System.out.println("estado final do tabuleiro");
         System.out.println(p);
         if (p.Is_Terminal()){
-            if(p.turn.equals("O's turn"))
+            //! -----------------------------//
+            if (p.draw ==true)
+               System.out.println("Empate");
+            //! -----------------------------//
+            else if(p.turn.equals("O's turn"))
                 System.out.println("X Ganhou");
             else if (p.turn.equals("X's turn"))
                 System.out.println("O Ganhou");

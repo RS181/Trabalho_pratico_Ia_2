@@ -2,10 +2,10 @@
 import java.util.*;
 class Node_MCTS {
     //valor do no
-    private int value;
+    private double value;
     //numero de visitas do no
     private int n;
-    //numero de visitas do Pai
+    //numero de visitas do no Pai
     private int N;
     //valor de Upper Confidence Bounds for Trees para este no
     private double UCB1;
@@ -39,14 +39,13 @@ class Node_MCTS {
     //! C = 1 (escolhi esse valor para a constante)
     
     public double calculate_UCB1(){
-        double aux = Math.sqrt(Math.log(N)/n);
-
-        return value + 1 * aux;
+        double aux = Math.sqrt(2*Math.log(N)/n);
+        return (n/value)  + 0.5 * aux;
     }
 
     @Override
     public String toString() {
-        return "{UCB1 : "+UCB1 + ", valor : " +  value + ", numero de visitas : "+ n  + ", numero de visitas do no pai : " +N +"}";
+        return "{UCB1 : "+UCB1 + ", valor : " +  value + ", numero de visitas : "+ n  + ", numero de visitas do no pai : " +N +"}" + "\n"+current;
     }
 
     //getters e setters
@@ -56,7 +55,7 @@ class Node_MCTS {
     public int getn(){
         return n;
     }
-    public int getValue(){
+    public double getValue(){
         return value;
     }
     public double getUCB1(){
@@ -74,7 +73,7 @@ class Node_MCTS {
     public void setn(int n){
         this.n = n;
     }
-    public void setValue(int value){
+    public void setValue(double value){
         this.value = value;
     }
     public void setUCB1(double UCB1){

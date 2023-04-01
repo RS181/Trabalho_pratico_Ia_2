@@ -6,6 +6,8 @@ class Puzzle {
     char[][] state;// estado do jogo
     int[] valid;// indica a linha mais "funda" ,em que e possivel jogar , de cada coluna
     String turn; // diz quem e que vai jogar
+    
+    boolean draw = false; //Indica que houve empate (true -> houve empate) (false -> nao houve empate)
 
     int Utility;//Guarda o valor da funcao utilidade
     Puzzle() {
@@ -164,11 +166,7 @@ class Puzzle {
 
     //! Verfica se o jogo acabou ou nao (PARECE BEM MAS TER CUIDADO)
     boolean Is_Terminal(){ 
-        //nao tem mais espaco para fazer jogadas
-        if (Full()){
-            // System.out.println("Tabuleiro cheio");
-            return true;
-        }
+
         //?Verifica se algum dos jogadores ganhou (Horizontal)
         
         for (int i = 0 ; i < state.length ;i++){
@@ -193,6 +191,16 @@ class Puzzle {
         Diagonais d = new Diagonais(this);
         if (d.check_final() == true){
             // System.out.println("Temos vencedor nas diagonais");
+            return true;
+        }
+
+        //nao tem mais espaco para fazer jogadas
+        //temos que fazer este teste no fim porque a 
+        //ultima possivel  jogada pode levar para a a
+        //vitoria
+        if (Full()){
+            System.out.println("Empate");
+            draw = true;
             return true;
         }
         return false;
