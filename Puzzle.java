@@ -199,7 +199,7 @@ class Puzzle {
         //ultima possivel  jogada pode levar para a a
         //vitoria
         if (Full()){
-            System.out.println("Empate");
+            // System.out.println("Empate");
             draw = true;
             return true;
         }

@@ -1,4 +1,9 @@
-1)Acabar MCTS
-2)testar MCTS  
-3) testar minimax
-4)testar alpha beta
+1) Peguntar se o calculo da funcao utilidade tem de ter em conta o 
+caso de ter XXXX ou OOOO 
+2) No MCTS como e que fazemos a escolha do filho que o bot vai escolher 
+depois de aplicar o algoritmo
+3)No MCTS cada vez que bot jogo e fazemos respetiva arvore de procura
+, temos de fazer-la desde do inicio  
+4)testar MCTS  
+5) testar minimax
+6)testar alpha beta

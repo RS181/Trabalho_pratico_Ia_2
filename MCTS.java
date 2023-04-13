@@ -241,6 +241,9 @@ public class MCTS {
             //todo !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             times--;
         }
+
+        //TODO Falta escolher o melhor no filho e colocar-lo em bestnode 
+        //TODO para depois usar no algoritmo 
         System.out.println("Estado final depois do MCTS");
         for (Node_MCTS n : root.getfilhos()){
             // System.out.println("Filho " +n.getfilhos());
