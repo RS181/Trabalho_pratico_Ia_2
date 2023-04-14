@@ -1,9 +1,14 @@
 1) Peguntar se o calculo da funcao utilidade tem de ter em conta o 
 caso de ter XXXX ou OOOO 
+R: certo 
 2) No MCTS como e que fazemos a escolha do filho que o bot vai escolher 
 depois de aplicar o algoritmo
+R: pelo valor e UCB1 
 3)No MCTS cada vez que bot jogo e fazemos respetiva arvore de procura
-, temos de fazer-la desde do inicio  
+, temos de fazer-la desde do inicio 
+R:Nao e necessario
+
+
 4)testar MCTS  
 5) testar minimax
 6)testar alpha beta

@@ -61,7 +61,7 @@ public class Main{
             //escolhe o bot
             else{
                 Node aux = new Node(p);
-                //Sugestao da professora
+                //Sugestao da professora (verificar se algum sucessor do no atual e final, se sim retornar esse no )
                 Node aux2 = aux.Succesor_is_Final();
                 if (aux2 != null){
                     p = aux.Succesor_is_Final().current;
@@ -93,6 +93,51 @@ public class Main{
         }
     }
 
+    //! Implementar com MCTS
+
+    public static void Play_with_Computer_MCTS(Puzzle p, int nr_times){
+        Scanner stdin = new Scanner(System.in);
+        while (!(p.Is_Terminal()) && !(p.Full())){
+            System.out.println(p);
+            System.out.println("It is now " + p.turn);
+            //!escolhe o  jogador 
+            if (p.turn .equals("O's turn")){
+                System.out.println("Make a move by choosing your coordinates to play (0 to 6) ");
+                p.Choose_col(stdin.nextInt());
+            }
+            //escolhe o bot 
+
+            else {
+                Node_MCTS aux = new Node_MCTS(p);
+                //Sugestao da professora (verificar se algum sucessor do no atual e final, se sim retornar esse no )
+                Node_MCTS aux2 = aux.Succesor_is_Final();
+                if (aux2 != null){
+                    p = aux.Succesor_is_Final().getPuzzle();
+                }
+                else {
+                    //Sugestao da professora    
+                    Node_MCTS ans = (new MCTS(aux,nr_times)).getBest_child();
+                    p = ans.getPuzzle();
+                    System.out.println("Jogada feita por computador");
+                }
+            }
+
+        }
+            System.out.println("estado final do tabuleiro");
+            System.out.println(p);
+            if (p.Is_Terminal()){
+                //! -----------------------------//
+                if (p.draw ==true)
+                   System.out.println("Empate");
+                //! -----------------------------//
+                else if(p.turn.equals("O's turn"))
+                    System.out.println("X Ganhou");
+                else if (p.turn.equals("X's turn"))
+                    System.out.println("O Ganhou");
+            }
+    }
+
+
 
     public static void main(String[] args) {
         Scanner stdin = new Scanner (System.in);
@@ -106,15 +151,20 @@ public class Main{
         // System.out.println(p);
         // System.out.println(Arrays.toString(p.valid));
         // Play_with_2_players(p);        
-        System.out.println("Indique a dificuldade (< 8 senao demora muito)");
-        int dificuldade = stdin.nextInt();
-        stdin.nextLine();
+       
         System.out.println("Indique contra qual algoritmo quer jogar\nminimax   alphabeta     montecarlo");
         String Ai = stdin.nextLine();
-        if (Ai.equals("minimax") ||Ai.equals("alphabeta"))
+        if (Ai.equals("minimax") ||Ai.equals("alphabeta")){
+            System.out.println("Indique a profundide maxima (< 8 senao demora muito)");
+            int dificuldade = stdin.nextInt();
+            // stdin.nextLine();
             Play_with_Computer(p,dificuldade,Ai);     
+        
+        }
         else if (Ai.equals("montecarlo")){
-            System.out.println("Ainda por implementar");
+            System.out.println("Indique o numero de vezes que devemos aplicar o algoritmo MCTS");
+            int nr_times = stdin.nextInt();
+            Play_with_Computer_MCTS(p, nr_times);
         }
 
     }

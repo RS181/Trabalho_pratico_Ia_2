@@ -3,11 +3,28 @@ import java.util.*;
 public class MCTS {
 
     private Node_MCTS best_child;
+
     
     //Inicio do MCTS definindo o no raiz  co numero de iteracoes
     MCTS(Node_MCTS root,int times){
-        monte_carlo_tree_search(root,times);       
+        monte_carlo_tree_search(root,times);
+        
+        Node_MCTS aux = root.getfilhos().get(0);
+        
 
+        for (Node_MCTS filho : root.getfilhos()){
+            if (filho.getUCB1() > aux.getUCB1())
+                aux = filho; 
+        }    
+
+        //guardamos o melhor no em best child
+        best_child = aux;
+        // System.out.println("Biggest Node UCB1 = " + aux );   
+    }
+
+    //obter o melhor filho (apos a aplicacao do algoritmo MCTS )
+    public Node_MCTS getBest_child() {
+        return best_child;
     }
 
     // gera os filhos de um no e guarda-os no 
@@ -30,8 +47,8 @@ public class MCTS {
             }
         }
         n.setfilhos(suc);
-        if (suc.size() == 0)
-            System.out.println("No atual nao tem filhos possiveis " + n);
+        // if (suc.size() == 0)
+            // System.out.println("No atual nao tem filhos possiveis " + n);
     }
 
 
@@ -103,7 +120,9 @@ public class MCTS {
         //Aqui so nos interessa trabalhar com o puzzle
         //porque queremos chegar a um puzzle final, para retornar o valor
         // do rollout (0,0.5,1)
-        System.out.println("Inicio do roolout do no : "  + current);
+
+        // System.out.println("Inicio do roolout do no : "  + current);
+       
         //Copiamos o puzzle atual para nao fazer alteracoes sobre o mesmo
         // System.out.println(current);
         Puzzle cur = current.getPuzzle().copy();
@@ -114,10 +133,10 @@ public class MCTS {
             int Random_action = Random_Available_Action(cur);
             //geramos um novo puzzle com essa acao aleatoria
             cur = cur.Result(cur, Random_action);
-            System.out.println("Puzzle resultante escolhendo a coluna " + Random_action);
-            System.out.println(cur);
+            // System.out.println("Puzzle resultante escolhendo a coluna " + Random_action);
+            // System.out.println(cur);
         }
-        System.out.println("Fim do roolout do no : "  + current);
+        // System.out.println("Fim do roolout do no : "  + current);
 
         //valor que retornamos da funcao rollout
         double return_value = -1;
@@ -244,11 +263,11 @@ public class MCTS {
 
         //TODO Falta escolher o melhor no filho e colocar-lo em bestnode 
         //TODO para depois usar no algoritmo 
-        System.out.println("Estado final depois do MCTS");
-        for (Node_MCTS n : root.getfilhos()){
+        // System.out.println("Estado final depois do MCTS");
+        // for (Node_MCTS n : root.getfilhos()){
             // System.out.println("Filho " +n.getfilhos());
-            System.out.println(n);
-        }
+            // System.out.println(n);
+        // }
         // System.out.println(root.getn());
 
     }

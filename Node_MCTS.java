@@ -40,13 +40,30 @@ class Node_MCTS {
     
     public double calculate_UCB1(){
         double aux = Math.sqrt(2*Math.log(N)/n);
-        return (n/value)  + 0.5 * aux;
+        return (value/n)  + 0.5 * aux;
     }
 
     @Override
     public String toString() {
         return "{UCB1 : "+UCB1 + ", valor : " +  value + ", numero de visitas : "+ n  + ", numero de visitas do no pai : " +N +"}" + "\n"+current;
     }
+
+
+    //Funcao auxiliar para favorecer vitorias mais rapidas
+    Node_MCTS  Succesor_is_Final(){
+        Puzzle aux = current;
+        // ? So gera sucessores se o no atual nao for
+        for (int i = 0; i < 7; i++) {
+            // Se a coluna atual for valida para jogar criamos sucesores
+            if (aux.valid[i] != -1) {
+                Puzzle temp = aux.Result(aux, i);
+                if(temp.Is_Terminal())
+                    return new Node_MCTS(temp);
+            }
+        }
+        return null;
+    }   
+
 
     //getters e setters
     public int getN() {
