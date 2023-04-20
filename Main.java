@@ -48,6 +48,9 @@ public class Main{
     //Supondo que X sao as jogadas do computador
     public static void Play_with_Computer(Puzzle p, int Dificulty,String AI){
         Scanner stdin = new Scanner (System.in);
+        //! TEMPO
+        long starTime ,endTime,duration;
+        //!
 
         //Enquanto nao e terminal e nao esta completamente cheio (quebra o ciclo se algum destes falhar)
         while(!(p.Is_Terminal()) && !(p.Full())){
@@ -63,6 +66,12 @@ public class Main{
                 Node aux = new Node(p);
                 //Sugestao da professora (verificar se algum sucessor do no atual e final, se sim retornar esse no )
                 Node aux2 = aux.Succesor_is_Final();
+                
+                //!TEMPO 
+                starTime = System.currentTimeMillis();
+                //!
+                
+                
                 if (aux2 != null){
                     p = aux.Succesor_is_Final().current;
                 }
@@ -75,7 +84,14 @@ public class Main{
                         ans = (new AlphaBeta(aux, Dificulty)).getBestNode();
                     p = ans.current;
                     System.out.println("Jogada feita por computador");
+                
+                    //! TEMPO
+                    endTime = System.currentTimeMillis();
+                    duration = endTime - starTime;
+
+                    System.out.println("Time taken: " + duration  + "milliseconds");
                 }
+
             }
         }
 
