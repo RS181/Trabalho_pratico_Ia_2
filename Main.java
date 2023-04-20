@@ -77,11 +77,20 @@ public class Main{
                 }
                 //Sugestao da professora
                 else {
+                    int nr_nos = -1;
                     Node ans;
-                    if (AI.equals("minimax"))
-                        ans = (new MiniMax(aux, Dificulty)).getBestNode();
-                    else 
-                        ans = (new AlphaBeta(aux, Dificulty)).getBestNode();
+                    if (AI.equals("minimax")){
+                        MiniMax m = new MiniMax(aux, Dificulty);
+                        // ans = (new MiniMax(aux, Dificulty)).getBestNode();
+                        ans = m.getBestNode();
+                        nr_nos = m.qtd_nos;
+                    }
+                    else {
+                        AlphaBeta b = new AlphaBeta(aux,Dificulty);
+                        // ans = (new AlphaBeta(aux, Dificulty)).getBestNode();
+                        ans = b.getBestNode();
+                        nr_nos = b.qtd_nos;
+                    }
                     p = ans.current;
                     System.out.println("Jogada feita por computador");
                 
@@ -90,6 +99,8 @@ public class Main{
                     duration = endTime - starTime;
 
                     System.out.println("Time taken: " + duration  + "milliseconds");
+                    System.out.println("Numero de nos " + nr_nos);
+
                 }
 
             }

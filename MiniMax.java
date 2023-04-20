@@ -4,10 +4,12 @@ public class MiniMax {
     private Node initial;
     private int MaxDepth;
     private Node bestNode;
+    static int qtd_nos = 1;
 
     MiniMax(Node i, int MD) {
         initial = i;
         MaxDepth = MD;
+        qtd_nos = 1;
         bestNode = MiniMax(initial, MaxDepth);
     }
 
@@ -32,6 +34,9 @@ public class MiniMax {
                 }
             }
         }
+
+        qtd_nos += suc.size();
+
         return suc;
     }
     public static Node MiniMax(Node Initial, int MaxDepth) {

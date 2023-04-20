@@ -8,10 +8,12 @@ public class AlphaBeta {
     private Node initial;
     private int MaxDepth;
     private Node bestNode;
+    static int qtd_nos = 1;
 
     AlphaBeta(Node i, int MD) {
         initial = i;
         MaxDepth = MD;
+        qtd_nos = 1;
         bestNode = AlphaBeta(initial, MaxDepth, Integer.MIN_VALUE, Integer.MAX_VALUE);
     }
 
@@ -35,6 +37,9 @@ public class AlphaBeta {
                 }
             }
         }
+
+        qtd_nos += suc.size();
+        
         return suc;
     }
 
