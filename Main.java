@@ -70,8 +70,7 @@ public class Main{
                 //!TEMPO 
                 starTime = System.currentTimeMillis();
                 //!
-                
-                
+        
                 if (aux2 != null){
                     p = aux.Succesor_is_Final().current;
                 }
@@ -124,6 +123,11 @@ public class Main{
 
     public static void Play_with_Computer_MCTS(Puzzle p, int nr_times){
         Scanner stdin = new Scanner(System.in);
+
+        //! TEMPO
+        long starTime, endTime,duration;
+        //!
+
         while (!(p.Is_Terminal()) && !(p.Full())){
             System.out.println(p);
             System.out.println("It is now " + p.turn);
@@ -138,15 +142,33 @@ public class Main{
                 Node_MCTS aux = new Node_MCTS(p);
                 //Sugestao da professora (verificar se algum sucessor do no atual e final, se sim retornar esse no )
                 Node_MCTS aux2 = aux.Succesor_is_Final();
+
+                //! TEMPO
+                starTime = System.currentTimeMillis();
+                //!
                 if (aux2 != null){
                     p = aux.Succesor_is_Final().getPuzzle();
                 }
                 else {
-                    //Sugestao da professora    
-                    Node_MCTS ans = (new MCTS(aux,nr_times)).getBest_child();
+                    int nr_nos = -1;
+                    MCTS m = new MCTS(aux, nr_times);
+                    // Node_MCTS ans = (new MCTS(aux,nr_times)).getBest_child();
+                    Node_MCTS ans = m.getBest_child();
+                    nr_nos = m.qtd_nos;
                     p = ans.getPuzzle();
+                    
+                    
                     System.out.println("Jogada feita por computador");
+                
+                    //! TEMPO e NOS 
+                    endTime = System.currentTimeMillis();
+                    duration = endTime - starTime;
+
+                    System.out.println("Time taken: " + duration  + "milliseconds");
+                    System.out.println("Numero de nos " + nr_nos);
                 }
+
+
             }
 
         }

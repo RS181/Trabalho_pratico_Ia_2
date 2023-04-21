@@ -4,9 +4,10 @@ public class MCTS {
 
     private Node_MCTS best_child;
 
-    
+    static int qtd_nos = 1;    
     //Inicio do MCTS definindo o no raiz  co numero de iteracoes
     MCTS(Node_MCTS root,int times){
+        qtd_nos = 1;
         monte_carlo_tree_search(root,times);
         
         Node_MCTS aux = root.getfilhos().get(0);
@@ -46,9 +47,10 @@ public class MCTS {
                 }
             }
         }
+        qtd_nos += suc.size();
+        
         n.setfilhos(suc);
-        // if (suc.size() == 0)
-            // System.out.println("No atual nao tem filhos possiveis " + n);
+        
     }
 
 
@@ -114,7 +116,7 @@ public class MCTS {
     //*O VALOR RETORNADO PELO ROLLOUT E:
     //* -> 0 (por vitoria de oponente)
     //* -> 0.5 (por empate) */
-    //* -> 1 (por vitoria de AI)
+    //* -> 2 (por vitoria de AI)
     //! No rollout os estados percorridos nao contam como visitados
     public static double roollout(Node_MCTS current){
         //Aqui so nos interessa trabalhar com o puzzle
@@ -149,7 +151,7 @@ public class MCTS {
             //! -----------------------------//
             else if(cur.turn.equals("O's turn")){
                 // System.out.println("X Ganhou");
-                return_value = 1;
+                return_value = 2;
 
             }
             else if (cur.turn.equals("X's turn")){
@@ -157,23 +159,9 @@ public class MCTS {
                 return_value = 0;
             }
         }
-        if (return_value == -1)
-            System.out.println("ERRO NA LINHA 137");
-        
+
         return return_value;
     }
-
-    //! IMPORTANTE
-    //! NO BACKPROPAGATION DEVEMOS CALCULAR O UCB1 DE BAIXO PARA CIMA ? (EU ACHO QUE NAO)
-
-    //todo Testar a ver se guarda os valores corretos para os nos (value,n,N)
-    //todo (e verificar se guarda a "arvore" , ou seja , se guarda os valores corretos 
-    //todo para cada no)
-
-    //! DUVIDA ,  se em algum momento o algoritmo encontrar um no final , o que e que o mesmo 
-    //!faz
-
-
 
     public static void monte_carlo_tree_search(Node_MCTS root,int times){
         int condition = root.getn();
@@ -183,11 +171,10 @@ public class MCTS {
             //que mais tarde vai permitir atualizar os
             //valores com Backpropagate
             ArrayList<Node_MCTS> visited = new ArrayList<>();
-            //adicionamos o no raiz
+
             visited.add(root);
             Node_MCTS current = root;
             //enquanto o no nao e uma folha e  o puzzle correspondente nao e final
-            //todo confirmar este ciclo abaixo
             while (!(current.isLeaf()) && !(current.getPuzzle().Is_Terminal())){
                 //atualiza o valor de UCB1 para os nos filhos de current
                 // System.out.println("DEBUG");
@@ -203,9 +190,6 @@ public class MCTS {
             }
             //Chegamos a um no que e uma folha ou que e final
             
-            //todo Confirmar daqui ate proximo todo !!!!!!!!
-
-            //todo CONFIRMAR SE ESTOU A "TRATAR BEM" DO NO RAIZ
             // se o no nao for novo , ou for o no root
             if (current.getn() != 0 ){
                 // System.out.println("Entrei aqui");
@@ -227,19 +211,7 @@ public class MCTS {
                     visited.add(current);
                 }
             }
-    
-
-            //todo !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        
-            // System.out.println("Caminho ate agora");
-            // for (Node_MCTS n : visited){
-            //    atualiza as estatiscas dos nos da arvore visitados
-                // System.out.println(n);
-            // }
-            // System.out.println("    FIM ");
-
-
-                //Fazemos o rollout do novo no 
+            //Fazemos o rollout do novo no 
             // e guardamos o valor na variavel value
             //! TEM CASOS EM QUE CURRENT E NULL
             double value = roollout(current);       
