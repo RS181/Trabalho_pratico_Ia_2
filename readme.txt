@@ -1,4 +1,4 @@
-As instruções para executar o programa estão presentes no relatório enviado nesta pasta. 
+As instruções para executar o programa estão presentes no relatório presente neste repositorio. 
 A informação está escrita como "Execução do Programa" na página 8.
 
 Requisitos de Sistema:
