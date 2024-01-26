@@ -198,10 +198,6 @@ public class MCTS {
                 //geramos os filhos do no current e colocamos-os 
                 // nos filhos de current 
                 Expand(current);
-                // System.out.println("------------------------------------------");
-                // for (Node_MCTS n : current.getfilhos())
-                    // System.out.println(n);
-                // System.out.println("------------------------------------------");
 
                 //caso o no atual nao seja final
                 if (current.getfilhos().size() != 0 ){
@@ -216,31 +212,19 @@ public class MCTS {
             //! TEM CASOS EM QUE CURRENT E NULL
             double value = roollout(current);       
 
-            //Falta so fazer a Backpropagation dos valores
 
             //Fazemos reverse a lista de visitados 
             // para percorrer desde do ultimo no ate raiz
             Collections.reverse(visited);
 
-            //TODO confirmar ate ao proximo todo
             //Fazemos a backprogation aos elementos de visited
             for (Node_MCTS n : visited){
                 //atualiza as estatiscas dos nos da arvore visitados
                 n.setn(n.getn() +1);
                 n.setValue(value+n.getValue());
             }
-            //todo !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             times--;
         }
-
-        //TODO Falta escolher o melhor no filho e colocar-lo em bestnode 
-        //TODO para depois usar no algoritmo 
-        // System.out.println("Estado final depois do MCTS");
-        // for (Node_MCTS n : root.getfilhos()){
-            // System.out.println("Filho " +n.getfilhos());
-            // System.out.println(n);
-        // }
-        // System.out.println(root.getn());
 
     }
 

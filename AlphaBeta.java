@@ -2,8 +2,6 @@
 // 24/03/2023
 import java.util.*;
 
-//TODO Mostrar implementacao a professora
-//! TENHO DUVIDAS NA PARTE DE ATUALIZACAO DO ALPHA E BETA
 public class AlphaBeta {
     private Node initial;
     private int MaxDepth;

@@ -1,4 +1,0 @@
-
-git add .
-git commit -m "nome_do_commit"
-git push  origin main

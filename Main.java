@@ -1,5 +1,4 @@
 // 23/03/2023 10:18
-//! Minimax aparente funcionar
 import java.util.*;
 
 public class Main{
@@ -97,8 +96,8 @@ public class Main{
                     endTime = System.currentTimeMillis();
                     duration = endTime - starTime;
 
-                    System.out.println("Time taken: " + duration  + "milliseconds");
-                    System.out.println("Numero de nos " + nr_nos);
+                    // System.out.println("Time taken: " + duration  + "milliseconds");
+                    // System.out.println("Numero de nos " + nr_nos);
 
                 }
 
@@ -164,8 +163,8 @@ public class Main{
                     endTime = System.currentTimeMillis();
                     duration = endTime - starTime;
 
-                    System.out.println("Time taken: " + duration  + "milliseconds");
-                    System.out.println("Numero de nos " + nr_nos);
+                    // System.out.println("Time taken: " + duration  + "milliseconds");
+                    // System.out.println("Numero de nos " + nr_nos);
                 }
 
 
@@ -197,10 +196,6 @@ public class Main{
             aux += stdin.nextLine();
         Puzzle p = new Puzzle();
         p.upload_board(aux);
-        // System.out.println(p);
-        // System.out.println(Arrays.toString(p.valid));
-        // Play_with_2_players(p);        
-       
         System.out.println("Indique contra qual algoritmo quer jogar\nminimax   alphabeta     montecarlo");
         String Ai = stdin.nextLine();
         if (Ai.equals("minimax") ||Ai.equals("alphabeta")){
